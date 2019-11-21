@@ -120,7 +120,7 @@
             }
 
             .crtime-div{
-                width: 20%;
+                width: 21%;
                 margin: 0 auto;
                 font-size: 20px;
                 font-weight: bold;
@@ -188,112 +188,128 @@
 
 
         
-
         <script>
-           
-            function hrup()
-            {
-                var i = Number(document.getElementById("hr").innerHTML);
-                var i = i-1;
-                if(i>0)
-                {
-                 document.getElementById("hr").innerHTML = i;
-                 document.getElementById("res-hr").innerHTML = i;
-                }
-                
-            }
-            
-            function hrdw()
-            {
-                var i = Number(document.getElementById("hr").innerHTML);
-                var i = i+1;
-                if(i<13)
-                {
-                 document.getElementById("hr").innerHTML = i;
-                 document.getElementById("res-hr").innerHTML = i;
-                }
-            }
-            
-            function minup()
-            {
-                var i = Number(document.getElementById("min").innerHTML);
-                var i = i-1;
-                if(i>=0)
-                {
-                 document.getElementById("min").innerHTML = i;
-                 document.getElementById("res-min").innerHTML = i;
-                }
-                
-            }
-            
-            function mindw()
-            {
-                var i = Number(document.getElementById("min").innerHTML);
-                var i = i+1;
-                if(i<60)
-                {
-                 document.getElementById("min").innerHTML = i;
-                 document.getElementById("res-min").innerHTML = i;
-                }
-                
-            }
-            
-            function amup()
-            {
-                document.getElementById("ampm").innerHTML = "AM";
-                document.getElementById("res-ampm").innerHTML = "AM";
-            }
-
-            function pmdw()
-            {
-                document.getElementById("ampm").innerHTML = "PM";
-                document.getElementById("res-ampm").innerHTML = "PM";
-            }
-
-            function reset()
-            {
-                location.reload();
-            }
-            
-            function setalarm()
-            {
-                setInterval(function(){
-                                     document.getElementById("opdiv").style.backgroundColor = "rgb(241, 129, 109)";
-                                    setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },500);
-                                    }, 1000);
-                
-            }
-
             setInterval(function(){
-                                    var crhr = document.getElementById("date-hr");
-                                    var crmin = document.getElementById("date-min");
-                                    var crsec = document.getElementById("date-sec");
-                                    var crhour = new Date().getHours();
-                                    var crminute = new Date().getMinutes();
-                                    var crsecond = new Date().getSeconds();
-                                    crhr.innerHTML = crhour;
-                                    crmin.innerHTML = crminute;
-                                    crsec.innerHTML = crsecond;
+                                        var crhr = document.getElementById("date-hr");
+                                        var crmin = document.getElementById("date-min");
+                                        var crsec = document.getElementById("date-sec");
+                                        var crhour = new Date().getHours();
+                                        var crminute = new Date().getMinutes();
+                                        var crsecond = new Date().getSeconds();
+                                        crhr.innerHTML = crhour;
+                                        crmin.innerHTML = crminute;
+                                        crsec.innerHTML = crsecond;
+                                  }, 100);
+           
+                function hrup()
+                {
+                    var i = Number(document.getElementById("hr").innerHTML);
+                    var i = i-1;
+                    if(i>0)
+                    {
+                     document.getElementById("hr").innerHTML = i;
+                     document.getElementById("res-hr").innerHTML = i;
+                    }
+                    
+                }
+                
+                function hrdw()
+                {
+                    var i = Number(document.getElementById("hr").innerHTML);
+                    var i = i+1;
+                    if(i<13)
+                    {
+                     document.getElementById("hr").innerHTML = i;
+                     document.getElementById("res-hr").innerHTML = i;
+                    }
+                }
+                
+                function minup()
+                {
+                    var i = Number(document.getElementById("min").innerHTML);
+                    var i = i-1;
+                    if(i>=0)
+                    {
+                     document.getElementById("min").innerHTML = i;
+                     document.getElementById("res-min").innerHTML = i;
+                    }
+                    
+                }
+                
+                function mindw()
+                {
+                    var i = Number(document.getElementById("min").innerHTML);
+                    var i = i+1;
+                    if(i<60)
+                    {
+                     document.getElementById("min").innerHTML = i;
+                     document.getElementById("res-min").innerHTML = i;
+                    }
+                    
+                }
+                
+                function amup()
+                {
+                    document.getElementById("ampm").innerHTML = "AM";
+                    document.getElementById("res-ampm").innerHTML = "AM";
+                }
+                function pmdw()
+                {
+                    document.getElementById("ampm").innerHTML = "PM";
+                    document.getElementById("res-ampm").innerHTML = "PM";
+                }
+                function reset()
+                {
+                    location.reload();
+                }
+                
+                function setalarm()
+                {
+                    var wait = setInterval(waitfun, 1600);
+                    var resp = setInterval(respfun, 700);
+                }
 
-                                    var shr = Number(document.getElementById("hr").innerHTML);
-                                    var smin = Number(document.getElementById("min").innerHTML);
-                                    
-                                   if(crhour > 12)
-                                   {
-                                       crhour = crhour-12;
-                                   }
-                                    if(shr==crhour)
-                                    {
-                                        if(smin==crminute)
-                                        {
-                                            setInterval(function(){
-                                                                    document.getElementById("opdiv").style.backgroundColor = "rgb(241, 129, 109)";
-                                                                    setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },350);
-                                                                 }, 700);
-                                        }
-                                    }
+                function waitfun()
+                {
+                    document.getElementById("opdiv").style.backgroundColor = "rgb(241, 129, 109)";
+                    setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },800);
+                }
 
-                                    }, 100);
-        </script>
+                function respfun()
+                {
+                        var crhourm = new Date().getHours();
+                        var crminutem = new Date().getMinutes();
+                        var shr = Number(document.getElementById("hr").innerHTML);
+                        var smin = Number(document.getElementById("min").innerHTML);
+                        
+                        if(document.getElementById("ampm").innerHTML == "PM")
+                        {
+                            shrf = shr + 12;
+                            if(shrf==24)
+                            {
+                                shrf = 0;
+                            }
+                        }
+
+
+                        if(shrf==crhourm)
+                        {
+                            if(smin==crminutem)
+                            {
+                                var stp = setInterval(function(){
+                                                        document.getElementById("opdiv").style.backgroundColor = "red";
+                                                        setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },350);
+                                                        }, 700);
+                            }
+                            else
+                                 {
+                                    clearInterval(stp);
+                                    document.getElementById("opdiv").style.backgroundColor = "";
+                                 }
+                        }
+                        
+                }
+            </script>
+       
     </body>
 </html>
