@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Alarm Clock</title>
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+
+            body{
+                padding: 0px;
+                margin: 0px;
+                background-color: rgb(242, 245, 237);
+            }
+
+            .outer-div{
+                width: 30%;
+                height: 427px;
+                margin: 0 auto;
+                margin-top: 100px;
+                border: 2px solid rgb(226, 226, 208);
+                background-color: rgb(232, 236, 236);
+                box-shadow: 3px 3px darkgray;
+            }
+
+            h1{
+                text-align: center;
+                font-family: cursive;
+            }
+
+            .output-div{
+                width: 50%;
+                height: 55px;
+                margin: 0 auto;
+                border: 1px solid darkgray;
+                box-shadow: 1px 1px 1px 2px rgb(138, 153, 113);
+            }
+
+            .op{
+                width: 26%;
+                height: 50px;
+                float: left;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            .dot{
+                width: 10%;
+                height: 50px;
+                float: left;
+                font-size: 40px;
+                font-weight: bolder;
+            }
+
+            .all-three-div{
+                width: 70%;
+                height: 200px;
+                margin: 0 auto;
+            }
+
+            .three-div{
+                width: 20%;
+                height: 150px;
+                float: left;
+                margin: 20px;
+                padding-top: 3px;
+                border: 1px solid rgb(168, 155, 155);
+                box-shadow: 2px 2px 2px 2px darkgray;
+            }
+
+            .set{
+                width: 90%;
+                height: 50px;
+                margin: 0 auto;
+                font-size: 30px;
+                font-weight: bold;
+                text-align: center;
+                padding-top: 5px;
+                margin-top: 5px;
+                border-radius: 3px;
+                margin-bottom: 5px;
+                border: 1px solid rgb(212, 212, 212);
+            }
+
+            .arrow{
+                width: 90%;
+                height: 40px;
+                margin: 0 auto;
+                padding-top: 3px;
+            }
+
+            .am{
+                font-size: 24px;
+                padding-top: 10px;
+            }
+
+            .faicon{
+                font-size: 32px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-left: 25%;
+            }
+
+            #div-btns{
+                width: 70%;
+                height: 60px;
+                margin: 0 auto;
+                padding: 15px;
+            }
+
+            .btn{
+                width: 30%;
+                height: 35px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-left: 36px;
+            }
+
+            .crtime-div{
+                width: 20%;
+                margin: 0 auto;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .btn:hover{
+                width: 30%;
+                height: 35px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin-left: 40px;
+            }
+
+            .btn:focus{
+                width: 30%;
+                height: 35px;
+                border-radius: 5px;
+                cursor: pointer;
+                outline: none;
+                font-weight: bold;
+                margin-left: 40px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="outer-div">
+            <h1>Alarm Clock</h1>
+            <div class="output-div" id="opdiv">
+                    <div class="op"><span id="res-hr">0</span></div>
+                    <div class="dot">:</div>
+                    <div class="op"><span id="res-min">0</span></div>
+                    <div class="dot">:</div>
+                    <div class="op"><span id="res-ampm">AM</span></div>
+            </div>
+            <div class="all-three-div">
+
+                <div class="three-div">
+                        <div class="arrow"><i class="fa fa-chevron-circle-up faicon" aria-hidden="true" onclick="hrup();"></i></div>
+                        <div class="set"><span id="hr">1</span></div>
+                        <div class="arrow"><i class="fa fa-chevron-circle-down faicon" aria-hidden="true" onclick="hrdw();"></i></div>
+                </div>
+                
+                <div class="three-div">
+                        <div class="arrow"><i class="fa fa-chevron-circle-up faicon" aria-hidden="true" onclick="minup();"></i></div>
+                        <div class="set"><span id="min">0</span></div>
+                        <div class="arrow"><i class="fa fa-chevron-circle-down faicon" aria-hidden="true" onclick="mindw();"></i></div>
+                </div>
+
+                <div class="three-div">
+                        <div class="arrow"><i class="fa fa-chevron-circle-up faicon amup" aria-hidden="true" onclick="amup();"></i></div>
+                        <div class="set am"><span id="ampm">AM</span></div>
+                        <div class="arrow"><i class="fa fa-chevron-circle-down faicon" aria-hidden="true" onclick="pmdw();"></i></div>
+                </div>
+            </div>
+            <div id="div-btns">
+                <button class="btn" onclick="setalarm();">Set Alarm</button>
+                <button class="btn" onclick="reset();">Reset</button>
+            </div>
+               <div class="crtime-div">
+                    <span id="date-hr">0</span> : <span id="date-min">0</span> : <span id="date-sec">0</span>
+               </div>
+        </div>
+
+
+        
+
+        <script>
+           
+            function hrup()
+            {
+                var i = Number(document.getElementById("hr").innerHTML);
+                var i = i-1;
+                if(i>0)
+                {
+                 document.getElementById("hr").innerHTML = i;
+                 document.getElementById("res-hr").innerHTML = i;
+                }
+                
+            }
+            
+            function hrdw()
+            {
+                var i = Number(document.getElementById("hr").innerHTML);
+                var i = i+1;
+                if(i<13)
+                {
+                 document.getElementById("hr").innerHTML = i;
+                 document.getElementById("res-hr").innerHTML = i;
+                }
+            }
+            
+            function minup()
+            {
+                var i = Number(document.getElementById("min").innerHTML);
+                var i = i-1;
+                if(i>=0)
+                {
+                 document.getElementById("min").innerHTML = i;
+                 document.getElementById("res-min").innerHTML = i;
+                }
+                
+            }
+            
+            function mindw()
+            {
+                var i = Number(document.getElementById("min").innerHTML);
+                var i = i+1;
+                if(i<60)
+                {
+                 document.getElementById("min").innerHTML = i;
+                 document.getElementById("res-min").innerHTML = i;
+                }
+                
+            }
+            
+            function amup()
+            {
+                document.getElementById("ampm").innerHTML = "AM";
+                document.getElementById("res-ampm").innerHTML = "AM";
+            }
+
+            function pmdw()
+            {
+                document.getElementById("ampm").innerHTML = "PM";
+                document.getElementById("res-ampm").innerHTML = "PM";
+            }
+
+            function reset()
+            {
+                location.reload();
+            }
+            
+            function setalarm()
+            {
+                setInterval(function(){
+                                     document.getElementById("opdiv").style.backgroundColor = "rgb(241, 129, 109)";
+                                    setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },500);
+                                    }, 1000);
+                
+            }
+
+            setInterval(function(){
+                                    var crhr = document.getElementById("date-hr");
+                                    var crmin = document.getElementById("date-min");
+                                    var crsec = document.getElementById("date-sec");
+                                    var crhour = new Date().getHours();
+                                    var crminute = new Date().getMinutes();
+                                    var crsecond = new Date().getSeconds();
+                                    crhr.innerHTML = crhour;
+                                    crmin.innerHTML = crminute;
+                                    crsec.innerHTML = crsecond;
+
+                                    var shr = Number(document.getElementById("hr").innerHTML);
+                                    var smin = Number(document.getElementById("min").innerHTML);
+                                    
+                                   if(crhour > 12)
+                                   {
+                                       crhour = crhour-12;
+                                   }
+                                    if(shr==crhour)
+                                    {
+                                        if(smin==crminute)
+                                        {
+                                            setInterval(function(){
+                                                                    document.getElementById("opdiv").style.backgroundColor = "rgb(241, 129, 109)";
+                                                                    setTimeout(function(){document.getElementById("opdiv").style.backgroundColor = ""; },350);
+                                                                 }, 700);
+                                        }
+                                    }
+
+                                    }, 100);
+        </script>
+    </body>
+</html>
